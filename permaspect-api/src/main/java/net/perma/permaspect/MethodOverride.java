@@ -1,6 +1,8 @@
 package net.perma.permaspect;
 
 import org.bukkit.Location;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -13,9 +15,9 @@ public abstract class MethodOverride {
         else throw new IllegalStateException("Already initialized");
     }
 
-    public static MethodOverride getInstance() {
+    public static @NotNull MethodOverride getInstance() {
         return instance;
     }
 
-    public abstract Optional<Boolean> Monsters_isDarkEnoughToSpawn(Location location);
+    public abstract @Nullable Optional<Boolean> Monsters_isDarkEnoughToSpawn(@NotNull Location location);
 }
