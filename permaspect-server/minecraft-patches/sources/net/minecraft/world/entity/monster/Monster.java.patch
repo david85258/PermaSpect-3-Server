@@ -1,0 +1,31 @@
+--- a/net/minecraft/world/entity/monster/Monster.java
++++ b/net/minecraft/world/entity/monster/Monster.java
+@@ -1,5 +_,6 @@
+ package net.minecraft.world.entity.monster;
+ 
++import java.util.Optional;
+ import java.util.function.Predicate;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.server.level.ServerLevel;
+@@ -26,6 +_,8 @@
+ import net.minecraft.world.level.LightLayer;
+ import net.minecraft.world.level.ServerLevelAccessor;
+ import net.minecraft.world.level.dimension.DimensionType;
++import net.perma.permaspect.MethodOverride;
++import org.bukkit.craftbukkit.util.CraftLocation;
+ 
+ public abstract class Monster extends PathfinderMob implements Enemy {
+     protected Monster(EntityType<? extends Monster> entityType, Level level) {
+@@ -88,6 +_,12 @@
+     }
+ 
+     public static boolean isDarkEnoughToSpawn(ServerLevelAccessor level, BlockPos pos, RandomSource random) {
++        // PermaSpect start - Enable to spawn monsters without light restrictions
++        Optional<Boolean> optional = MethodOverride.getInstance().Monsters_isDarkEnoughToSpawn(CraftLocation.toBukkit(pos, level.getMinecraftWorld()));
++        if (optional != null && optional.isPresent()) {
++            return optional.get();
++        }
++        // PermaSpect end - Enable to spawn monsters without light restrictions
+         // Purpur start - Config to disable hostile mob spawn on ice
+         if (!level.getMinecraftWorld().purpurConfig.mobsSpawnOnPackedIce || !level.getMinecraftWorld().purpurConfig.mobsSpawnOnBlueIce) {
+             net.minecraft.world.level.block.state.BlockState spawnBlock = level.getBlockState(pos.below());
