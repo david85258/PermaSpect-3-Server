@@ -12,12 +12,12 @@ index fb1fe2651e53a9bf46b3632c638e13eea9dcda93..3681474fda6094cfe578a1a0541ee051
       */
      Key BRAND_PURPUR_ID = Key.key("purpurmc", "purpur");
      // Purpur end
-+    // Tentacles start
++    // PermaSpect start
 +    /**
-+     * The brand id for Tentacles.
++     * The brand id for PermaSpect.
 +     */
-+    Key BRAND_TENTACLES_ID = Key.key("tentaclesmc", "tentacles");
-+    // Tentacles end
++    Key BRAND_PERMASPECT_ID = Key.key("permaspect", "permaspect");
++    // PermaSpect end
      /**
       * Gets the {@code ServerBuildInfo}.
       *
@@ -29,12 +29,12 @@ index ff3c20a1b3a3179cc6dfe991653a4020fd505490..a42c8b41b4edf2be916750566342f1de
          }
          // Purpur end
  
-+        // Tentacles start
++        // PermaSpect start
 +        @NotNull
-+        public org.bukkit.configuration.file.YamlConfiguration getTentaclesConfig() {
++        public org.bukkit.configuration.file.YamlConfiguration getPermaSpectConfig() {
 +            throw new UnsupportedOperationException("Not supported yet.");
 +        }
-+        // Tentacles end
++        // PermaSpect end
 +
          /**
           * Sends the component to the player

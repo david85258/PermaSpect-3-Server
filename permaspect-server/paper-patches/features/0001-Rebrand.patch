@@ -13,7 +13,7 @@ index 6ac291288f1e71f56a45e50b650dea4b4adeb763..bf627be29b75236fe037bd8059b0b047
      private static final int DISTANCE_UNKNOWN = -2;
      // Purpur start - Rebrand
 -    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
-+    private static final String DOWNLOAD_PAGE = "https://api.example.com/nonexistent/downloads"; // Tentacles
++    private static final String DOWNLOAD_PAGE = "https://api.example.com/nonexistent/downloads"; // PermaSpect
      private static int distance = DISTANCE_UNKNOWN; public int distance() { return distance; }
      // Purpur end - Rebrand
  
@@ -22,7 +22,7 @@ index 6ac291288f1e71f56a45e50b650dea4b4adeb763..bf627be29b75236fe037bd8059b0b047
              updateMessage = text("You are running a development version without access to version information", color(0xFF5300));
          } else {
 -            updateMessage = getUpdateStatusMessage("PurpurMC/Purpur", build); // Purpur - Rebrand
-+            updateMessage = getUpdateStatusMessage("PurpurMC/Tentacles", build); // Purpur - Rebrand // Tentacles
++            updateMessage = getUpdateStatusMessage("david85258/PermaSpect-3-Server", build); // Purpur - Rebrand // PermaSpect
          }
          final @Nullable Component history = this.getHistory();
  
@@ -30,19 +30,19 @@ index 6ac291288f1e71f56a45e50b650dea4b4adeb763..bf627be29b75236fe037bd8059b0b047
      private static Component getUpdateStatusMessage(final String repo, final ServerBuildInfo build) {
          //int distance = DISTANCE_ERROR; // Purpur - use field - Rebrand
  
-+        /* // Tentacles start
++        /* // PermaSpect start
          final OptionalInt buildNumber = build.buildNumber();
          if (buildNumber.isPresent()) {
              distance = fetchDistanceFromSiteApi(build, buildNumber.getAsInt());
          } else {
-+        */ // Tentacles end
++        */ // PermaSpect end
              final Optional<String> gitBranch = build.gitBranch();
              final Optional<String> gitCommit = build.gitCommit();
              if (gitBranch.isPresent() && gitCommit.isPresent()) {
                  distance = fetchDistanceFromGitHub(repo, gitBranch.get(), gitCommit.get());
              }
 -        }
-+        //} // Tentacles
++        //} // PermaSpect
  
          return switch (distance) {
              case DISTANCE_ERROR -> text("* Error obtaining version information", NamedTextColor.RED); // Purpur - Rebrand
@@ -51,7 +51,7 @@ index 6ac291288f1e71f56a45e50b650dea4b4adeb763..bf627be29b75236fe037bd8059b0b047
          try {
              try (final BufferedReader reader = Resources.asCharSource(
 -                URI.create("https://api.purpurmc.org/v2/purpur/" + build.minecraftVersionId()).toURL(), // Purpur - Rebrand
-+                URI.create("https://api.example.com/nonexistent/" + build.minecraftVersionId()).toURL(), // Purpur - Rebrand // Tentacles
++                URI.create("https://api.example.com/nonexistent/" + build.minecraftVersionId()).toURL(), // Purpur - Rebrand // PermaSpect
                  StandardCharsets.UTF_8
              ).openBufferedStream()) {
                  final JsonObject json = new Gson().fromJson(reader, JsonObject.class);
@@ -60,7 +60,7 @@ index 6ac291288f1e71f56a45e50b650dea4b4adeb763..bf627be29b75236fe037bd8059b0b047
                  return latest - jenkinsBuild;
              } catch (final JsonSyntaxException ex) {
 -                LOGGER.error("Error parsing json from Purpur's downloads API", ex); // Purpur - Rebrand
-+                LOGGER.error("Error parsing json from nonexistent downloads API", ex); // Purpur - Rebrand // Tentacles
++                LOGGER.error("Error parsing json from nonexistent downloads API", ex); // Purpur - Rebrand // PermaSpect
                  return DISTANCE_ERROR;
              }
          } catch (final IOException e) {
@@ -73,7 +73,7 @@ index bc7e4e5560708fea89c584b1d8b471f4966f311a..cd548a2a63ad99c0d91eeb7bb4600efd
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
 -                .appName("Purpur") // Purpur - Rebrand
-+                .appName("Tentacles") // Purpur - Rebrand // Tentacles
++                .appName("PermaSpect") // Purpur - Rebrand // PermaSpect
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
@@ -85,7 +85,7 @@ index b36e30fd4057a938e4d90cb42a2dca661f16478e..2bc6dfa41f76203320ff60b248dfa68e
  
      private static final String BRAND_PAPER_NAME = "Paper";
      private static final String BRAND_PURPUR_NAME = "Purpur"; // Purpur - Rebrand
-+    private static final String BRAND_TENTACLES_NAME = "Tentacles"; // Tentacles
++    private static final String BRAND_PERMASPECT_NAME = "PermaSpect"; // PermaSpect
  
      private static final String BUILD_DEV = "DEV";
  
@@ -94,10 +94,10 @@ index b36e30fd4057a938e4d90cb42a2dca661f16478e..2bc6dfa41f76203320ff60b248dfa68e
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
                  .map(Key::key)
 -                .orElse(BRAND_PURPUR_ID), // Purpur - Fix pufferfish issues // Purpur - Rebrand
-+                .orElse(BRAND_TENTACLES_ID), // Purpur - Fix pufferfish issues // Purpur - Rebrand // Tentacles
++                .orElse(BRAND_PERMASPECT_ID), // Purpur - Fix pufferfish issues // Purpur - Rebrand // PermaSpect
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
 -                .orElse(BRAND_PURPUR_NAME), // Purpur - Fix pufferfish issues // Purpur - Rebrand
-+                .orElse(BRAND_TENTACLES_NAME), // Purpur - Fix pufferfish issues // Purpur - Rebrand
++                .orElse(BRAND_PERMASPECT_NAME), // Purpur - Fix pufferfish issues // Purpur - Rebrand
              SharedConstants.getCurrentVersion().getId(),
              SharedConstants.getCurrentVersion().getName(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
@@ -106,7 +106,7 @@ index b36e30fd4057a938e4d90cb42a2dca661f16478e..2bc6dfa41f76203320ff60b248dfa68e
      @Override
      public boolean isBrandCompatible(final @NotNull Key brandId) {
 -        return brandId.equals(this.brandId) || brandId.equals(BRAND_PAPER_ID); // Purpur - Fix pufferfish issues // Purpur - Rebrand
-+        return brandId.equals(this.brandId) || brandId.equals(BRAND_PAPER_ID) || brandId.equals(BRAND_PURPUR_ID); // Purpur - Fix pufferfish issues // Purpur - Rebrand // Tentacles
++        return brandId.equals(this.brandId) || brandId.equals(BRAND_PAPER_ID) || brandId.equals(BRAND_PURPUR_ID); // Purpur - Fix pufferfish issues // Purpur - Rebrand // PermaSpect
      }
  
      @Override
@@ -119,7 +119,7 @@ index 2e7c3d4befeb6256ce81ecaa9ed4e8fbcb21651e..b141d13265063500d915f848697c2e8d
              } else {
                  // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(this.currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
 -                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Purpur"); // Paper // Purpur - Rebrand
-+                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Tentacles"); // Paper // Purpur - Rebrand // Tentacles
++                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to PermaSpect"); // Paper // Purpur - Rebrand // PermaSpect
                  // We don't need to parse pending
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
@@ -132,7 +132,7 @@ index 99eb04643fce44c37fd96c99756837ccafe7b559..49111df856edb29cf351a4b71348a639
          String result = "Unknown-Version";
  
 -        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.purpurmc.purpur/purpur-api/pom.properties"); // Pufferfish // Purpur - Rebrand
-+        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.purpurmc.tentacles/tentacles-api/pom.properties"); // Pufferfish // Purpur - Rebrand // Tentacles
++        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/net.perma.permaspect/permaspect-api/pom.properties"); // Pufferfish // Purpur - Rebrand // PermaSpect
          Properties properties = new Properties();
  
          if (stream != null) {
@@ -145,16 +145,16 @@ index b8b5c2da54a4875d0d23ae6f3efb6052ef25463a..48eee291e72b7fcf9bac0dcbb3c5f32f
                  if (isLongTimeout) {
                      logger.log(Level.SEVERE, "------------------------------");
 -                    logger.log(Level.SEVERE, "The server has stopped responding! This is (probably) not a Purpur bug."); // Paper // Purpur - Rebrand
-+                    logger.log(Level.SEVERE, "The server has stopped responding! This is (probably) not a Tentacles bug."); // Paper // Purpur - Rebrand // Tentacles
++                    logger.log(Level.SEVERE, "The server has stopped responding! This is (probably) not a PermaSpect bug."); // Paper // Purpur - Rebrand // PermaSpect
                      logger.log(Level.SEVERE, "If you see a plugin in the Server thread dump below, then please report it to that author");
                      logger.log(Level.SEVERE, "\t *Especially* if it looks like HTTP or MySQL operations are occurring");
                      logger.log(Level.SEVERE, "If you see a world save or edit, then it means you did far more than your server can handle at once");
                      logger.log(Level.SEVERE, "\t If this is the case, consider increasing timeout-time in spigot.yml but note that this will replace the crash with LARGE lag spikes");
 -                    logger.log(Level.SEVERE, "If you are unsure or still think this is a Purpur bug, please report this to https://github.com/PurpurMC/Purpur/issues"); // Purpur - Rebrand
-+                    logger.log(Level.SEVERE, "If you are unsure or still think this is a Tentacles bug, please report this to https://github.com/PurpurMC/Tentacles/issues"); // Purpur - Rebrand // Tentacles
++                    logger.log(Level.SEVERE, "If you are unsure or still think this is a PermaSpect bug, please report this to https://github.com/david85258/PermaSpect-3-Server/issues"); // Purpur - Rebrand // PermaSpect
                      logger.log(Level.SEVERE, "Be sure to include ALL relevant console errors and Minecraft crash reports");
 -                    logger.log(Level.SEVERE, "Purpur version: " + Bukkit.getServer().getVersion()); // Purpur - Rebrand
-+                    logger.log(Level.SEVERE, "Tentacles version: " + Bukkit.getServer().getVersion()); // Purpur - Rebrand // Tentacles
++                    logger.log(Level.SEVERE, "PermaSpect version: " + Bukkit.getServer().getVersion()); // Purpur - Rebrand // PermaSpect
  
                      if (net.minecraft.world.level.Level.lastPhysicsProblem != null) {
                          logger.log(Level.SEVERE, "------------------------------");
@@ -163,7 +163,7 @@ index b8b5c2da54a4875d0d23ae6f3efb6052ef25463a..48eee291e72b7fcf9bac0dcbb3c5f32f
                      // Paper end
                  } else {
 -                    logger.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PURPUR - THIS IS NOT A BUG OR A CRASH  - " + Bukkit.getServer().getVersion() + " ---"); // Purpur - Rebrand
-+                    logger.log(Level.SEVERE, "--- DO NOT REPORT THIS TO TENTACLES - THIS IS NOT A BUG OR A CRASH  - " + Bukkit.getServer().getVersion() + " ---"); // Purpur - Rebrand // Tentacles
++                    logger.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PERMASPECT - THIS IS NOT A BUG OR A CRASH  - " + Bukkit.getServer().getVersion() + " ---"); // Purpur - Rebrand // PermaSpect
                      logger.log(Level.SEVERE, "The server has not responded for " + (currentTime - lastTick) / 1000 + " seconds! Creating thread dump");
                  }
                  // Paper end - Different message for short timeout
@@ -172,7 +172,7 @@ index b8b5c2da54a4875d0d23ae6f3efb6052ef25463a..48eee291e72b7fcf9bac0dcbb3c5f32f
                      }
                  } else {
 -                    logger.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PURPUR - THIS IS NOT A BUG OR A CRASH ---"); // Purpur - Rebrand
-+                    logger.log(Level.SEVERE, "--- DO NOT REPORT THIS TO TENTACLES - THIS IS NOT A BUG OR A CRASH ---"); // Purpur - Rebrand // Tentacles
++                    logger.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PERMASPECT - THIS IS NOT A BUG OR A CRASH ---"); // Purpur - Rebrand // PermaSpect
                  }
  
                  logger.log(Level.SEVERE, "------------------------------");
