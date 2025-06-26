@@ -81,7 +81,7 @@ subprojects {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/octocat/hello-world")
+                url = uri("https://maven.pkg.github.com/david85258/PermaSpect-3-Server")
                 credentials {
                     username = System.getenv("GITHUB_ACTOR")
                     password = System.getenv("GITHUB_TOKEN")
