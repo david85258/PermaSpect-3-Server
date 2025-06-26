@@ -1,6 +1,8 @@
 jdk:
   - openjdk21
 before_install:
+  - echo "Configure Git"
+  - git config --global user.email "jitpack@jitpack.com" && git config --global user.name "Jit Pack"
   - echo "JitPack - Applying All Patches"
   - ./gradlew applyAllPatches --stacktrace
 install:
