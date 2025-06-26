@@ -79,9 +79,13 @@ subprojects {
 
     extensions.configure<PublishingExtension> {
         repositories {
-            maven("https://repo.purpurmc.org/snapshots") {
-                name = "permaspect"
-                credentials(PasswordCredentials::class)
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/octocat/hello-world")
+                credentials {
+                    username = System.getenv("GITHUB_ACTOR")
+                    password = System.getenv("GITHUB_TOKEN")
+                }
             }
         }
     }
