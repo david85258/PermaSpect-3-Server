@@ -1,0 +1,10 @@
+jdk:
+  - openjdk21
+before_install:
+  - echo "JitPack - Applying All Patches"
+  - ./gradlew applyAllPatches --stacktrace
+install:
+  - echo "JitPack - Building..."
+  - ./gradlew build --stacktrace
+  - echo "JitPack - Publish with DevBundle"
+  - ./gradlew publish -PpublishDevBundle --stacktrace
