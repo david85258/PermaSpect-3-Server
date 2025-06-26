@@ -77,7 +77,7 @@ subprojects {
         }
     }
 
-    /*extensions.configure<PublishingExtension> {
+    extensions.configure<PublishingExtension> {
         repositories {
             maven {
                 name = "GitHubPackages"
@@ -88,7 +88,7 @@ subprojects {
                 }
             }
         }
-    }*/
+    }
 }
 
 tasks.register("printMinecraftVersion") {
