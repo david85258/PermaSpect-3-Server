@@ -3,6 +3,9 @@ on: [ push, pull_request ]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v3
@@ -10,9 +13,14 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: 'gradle'
       - name: Configure Git
         run: git config --global user.email "action@github.com" && git config --global user.name "Github Action"
       - name: Apply patches
         run: ./gradlew applyAllPatches --stacktrace
       - name: Build
         run: ./gradlew build --stacktrace
+      - name: Publish package
+        run: ./gradlew publish -PpublishDevBundle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
