@@ -11,7 +11,7 @@ public abstract class MethodOverride {
     private static MethodOverride instance;
 
     public MethodOverride() {
-        if (instance != null) instance = this;
+        if (instance == null) instance = this;
         else throw new IllegalStateException("Already initialized");
     }
 
