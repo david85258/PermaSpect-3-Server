@@ -19,7 +19,7 @@
      @Override
      public boolean checkSpawnRules(LevelAccessor level, EntitySpawnReason spawnReason) {
 +        // PermaSpect start - Enable to spawn monsters without light restrictions
-+        Optional<Boolean> b = MethodOverride.getInstance().PathfinderMob_checkSpawnRules(CraftEntity.getEntity((CraftServer) Bukkit.getServer(), this), CraftLocation.toBukkit(this.blockPosition(), (Level) level));
++        Optional<Boolean> b = MethodOverride.getInstance().PathfinderMob_checkSpawnRules(CraftEntity.getEntity((CraftServer) Bukkit.getServer(), this), CraftLocation.toBukkit(this.blockPosition(), level()));
 +        if (b != null && b.isPresent()) {
 +            return b.get();
 +        }
