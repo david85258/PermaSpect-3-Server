@@ -1,11 +1,16 @@
 name: Upstream
+
 on:
-  schedule:
-    - cron: "*/15 * * * *"
+  workflow_dispatch:      # ejecución manual
+  schedule:               # ejecución automática semanal
+    - cron: "0 5 * * 0"   # dom 03:00 UTC → 05:00 hora peninsular
+
 jobs:
   upstream:
     runs-on: ubuntu-latest
+    # evita bucles si el commit lleva [ci‑skip]
     if: "!contains(github.event.commits[0].message, '[ci-skip]')"
+
     steps:
       - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v3
@@ -13,11 +18,15 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+
       - name: Configure Git
-        run: git config --global user.email "action@github.com" && git config --global user.name "Github Action"
-      - name: Update upstream
         run: |
-          ./scripts/updateUpstream.sh
+          git config --global user.email "action@github.com"
+          git config --global user.name "Github Action"
+
+      - name: Update upstream
+        run: ./scripts/updateUpstream.sh
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
