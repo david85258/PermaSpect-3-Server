@@ -1,6 +1,6 @@
 --- a/purpur-server/build.gradle.kts
 +++ b/purpur-server/build.gradle.kts
-@@ -37,9 +_,33 @@
+@@ -36,9 +_,33 @@
              outputDir = rootDirectory.dir("paper-server")
          }
      }
@@ -33,8 +33,8 @@
 +    // PermaSpect end - Rebrand
 +
      spigot {
-         buildDataRef = "702e1a0a5072b2c4082371d5228cb30525687efc"
-         packageVersion = "v1_21_R4" // also needs to be updated in MappingEnvironment
+         enabled = true
+         buildDataRef = "436eac9815c211be1a2a6ca0702615f995e81c44"
 @@ -125,10 +_,14 @@
      main {
          java { srcDir("../paper-server/src/main/java") }
