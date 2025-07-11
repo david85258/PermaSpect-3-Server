@@ -94,10 +94,10 @@ index 1b0ee48e28aaa68ddb1f28c23d3c5f5f40505c98..d890d68615d8b1935158656005b0d86f
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
                  .map(Key::key)
 -                .orElse(BRAND_PURPUR_ID), // Purpur - Rebrand
-+                .orElse(BRAND_PAPER_ID), // Purpur - Rebrand // PermaSpect
++                .orElse(BRAND_PERMASPECT_ID), // Purpur - Rebrand // PermaSpect
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
 -                .orElse(BRAND_PURPUR_NAME), // Purpur - Rebrand
-+                .orElse(BRAND_PAPER_NAME), // Purpur - Rebrand // PermaSpect
++                .orElse(BRAND_PERMASPECT_NAME), // Purpur - Rebrand // PermaSpect
              SharedConstants.getCurrentVersion().id(),
              SharedConstants.getCurrentVersion().name(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
